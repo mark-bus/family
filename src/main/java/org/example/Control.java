@@ -25,8 +25,10 @@ public class Control {
     private List<Person> collectPeople(List<Parent> parents) {
         Stream<Person> childStream = parents.stream()
                 .flatMap(parent -> parent.getChildren().stream());
-        return Stream.concat(parents.stream(), childStream)
-                .toList();
+        Stream<Person> parentStream = parents.stream()
+                .map(parent -> parent);
+
+        return Stream.concat(parentStream, childStream).toList();
     }
 
 }
